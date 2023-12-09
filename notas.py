@@ -2,6 +2,7 @@ from pydub import AudioSegment
 from pydub.generators import Sine
 from pydub.playback import play
 import numpy as np
+import pandas as pd
 
 def reproducir_nota(nota, duracion,fg):
     # Frecuencia de la nota C5 (do)
@@ -75,20 +76,26 @@ for octave in range(11):
         })
 
 n = np.arange(1,13)
-octave = np.arange(1,9)
-notes = np.zeros((8,12)) # 8 filas octavas , 12 columnas semitonos
+octave = np.arange(1,11)
+notes = np.zeros((11,12)) # 10 filas octavas , 12 columnas semitonos
 #notes[0,0] = 16.3516
 np.set_printoptions(linewidth=np.inf)
 np.set_printoptions(suppress=True)
 row_indices, col_indices = np.indices(notes.shape)
 #notes = row_indices * col_indices
-notes = reference_frequency * np.power(2, (( col_indices  ) + ( (row_indices * 12)   ))/12 )
- 
+notes = reference_frequency * np.power(2, (( col_indices  ) + ( (row_indices * 12) ))/12 ) # generación matematica de las frecuencias de las notas
+note_names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+#print(notes)
+# Crear un DataFrame de pandas con las frecuencias
+Data_frame_notas = pd.DataFrame(notes, index=['0', '1', '2','3', '4', '5','6', '7', '8','9', '10'], columns = note_names)
+print(Data_frame_notas)
+print(Data_frame_notas.loc['5','C'])
+
 
 #print(col_indices)
 #print(n)
 #print(octave)
-print(notes)
+
 #print(np.power(2,3))
 
     
