@@ -1,5 +1,5 @@
 import time
-import "/pyfluidsynth-master"
+import pyfluidsynth-master
 
 fs = fluidsynth.Synth()
 fs.start(driver = 'dsound')  # use DirectSound driver
